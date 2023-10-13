@@ -13,14 +13,19 @@
 - Veena Angelica
 - Andi Al Himam
 - Eko Nur
-- Andrew
+- Andrew Kevin
 - Fuadi
 - Riski Wahyudi
 - Juli Reformasi Harefa
+- Kresna Hiro Kartika
+- Mustafa
+- Rana Habyan
+- Dozen
+- Darmaji
 ```
 
 ## Deployment Link
 
 ### 1. Trello
 
-`-` <a href="https://trello.com/b/wHSgjDUH/pariwisata">LINK</a>
+`-` <a href=>LINK</a>
