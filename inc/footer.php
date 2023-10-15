@@ -1,5 +1,8 @@
 <script>
   $(document).ready(function(){
+    $('#p_use').click(function(){
+      uni_modal("Privacy Policy","policy.php","mid-large")
+    })
      window.viewer_modal = function($src = ''){
       start_loader()
       var t = $src.split('.')
@@ -55,17 +58,24 @@
     }
   })
 </script>
-<footer class="main-footer text-sm">
-        <strong>Copyright © <?php echo date('Y') ?>. 
-        <!-- <a href=""></a> -->
-        </strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-          <b><?php echo $_settings->info('short_name') ?> (by: <a href="" target="blank">Ari</a> )</b> v1.0
-        </div>
-      </footer>
-    </div>
-    <!-- ./wrapper -->
+<!-- Footer-->
+<footer class="footer py-4">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-4 text-lg-start">Copyright &copy; <?php echo $_settings->info('short_name') ?> 2023</div>
+			<div class="col-lg-4 my-3 my-lg-0">
+				<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+				<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+				<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<div class="col-lg-4 text-lg-end">
+				<a class="link-dark text-decoration-none me-3" href="javascript:void(0)" id="p_use">Privacy Policy</a>
+        <span>Developed By: <a href="">Ari</a></span>
+			</div>
+		</div>
+	</div>
+</footer>
+
    
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
