@@ -88,7 +88,8 @@ Class Users extends DBConnection {
 				$data .= " `{$k}` = '{$v}' ";
 			}
 		}
-		if(!empty($password))
+
+			if(!empty($password))
 			$data .= ", password = '".md5($password)."' ";
 		
 			if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
