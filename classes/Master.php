@@ -158,3 +158,152 @@ Class Master extends DBConnection {
 				return json_encode($resp);
 				exit;
 			}
+		}
+		$check = $this->conn->query("SELECT * FROM users  where username='{$username}' and id != $id ")->num_rows;
+		if($check > 0){
+			$resp['status'] = 'failed';
+			$resp['msg'] = "Username already taken.";
+			return json_encode($resp);
+			exit;
+		}
+		foreach($_POST as $k =>$v){
+			if($k == 'cpassword' || ($k == 'password' && empty($v)))
+				continue;
+				if(!empty($data)) $data .=",";
+					$data .= " {$k}='{$v}' ";
+		}
+		$save = $this->conn->query("UPDATE users set $data where id = $id ");
+		if($save){
+			foreach($_POST as $k =>$v){
+				if($k != 'cpassword')
+				$this->settings->set_userdata($k,$v);
+			}
+			
+			$this->settings->set_userdata('id',$this->conn->insert_id);
+			$resp['status'] = 'success';
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+
+	}
+
+	function save_inquiry(){
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k =>$v){
+				if(!empty($data)) $data .=",";
+					$data .= " {$k}='{$v}' ";
+		}
+		$save = $this->conn->query("INSERT INTO inquiry set $data");
+		if($save){
+			$resp['status'] = 'success';
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+
+	}
+	function rate_review(){
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k =>$v){
+			if($k=='review')
+			$v = addslashes(htmlentities($v));
+				if(!empty($data)) $data .=",";
+					$data .= " {$k}='{$v}' ";
+		}
+		$data .= ", user_id='".$this->settings->userdata('id')."' ";
+
+		$save = $this->conn->query("INSERT INTO rate_review set $data");
+		if($save){
+			$resp['status'] = 'success';
+			// $this->settings->set_flashdata("success","Rate & Review submitted.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+
+	}
+	function delete_inquiry(){
+		$del = $this->conn->query("DELETE FROM inquiry where id='{$_POST['id']}'");
+		if($del){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata("success","Inquiry Deleted.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+	}
+	function delete_review(){
+		$del = $this->conn->query("DELETE FROM rate_review where id='{$_POST['id']}'");
+		if($del){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata("success","Feedback Deleted.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+	}
+	function delete_booking(){
+		$del = $this->conn->query("DELETE FROM book_list where id='{$_POST['id']}'");
+		if($del){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata("success","Booking Deleted.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+	}
+}
+
+$Master = new Master();
+$action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
+$sysset = new SystemSettings();
+switch ($action) {
+	case 'save_package':
+		echo $Master->save_package();
+	break;
+	case 'delete_package':
+		echo $Master->delete_package();
+	break;
+	case 'delete_p_img':
+		echo $Master->delete_p_img();
+	break;
+	case 'book_tour':
+		echo $Master->book_tour();
+	break;
+	case 'update_book_status':
+		echo $Master->update_book_status();
+	break;
+	case 'register':
+		echo $Master->register();
+	break;
+	case 'update_account':
+		echo $Master->update_account();
+	break;
+	case 'save_inquiry':
+		echo $Master->save_inquiry();
+	break;
+	case 'rate_review':
+		echo $Master->rate_review();
+	break;
+	case 'delete_inquiry':
+		echo $Master->delete_inquiry();
+	break;
+	case 'delete_booking':
+		echo $Master->delete_booking();
+	break;
+	case 'delete_review':
+		echo $Master->delete_review();
+	break;
+	default:
+		// echo $sysset->index();
+		break;
+}
