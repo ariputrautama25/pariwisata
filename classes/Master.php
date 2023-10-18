@@ -90,3 +90,71 @@ Class Master extends DBConnection {
 			$resp['error'] = $this->conn->error;
 		}
 		return json_encode($resp);
+}
+	function book_tour(){
+		extract($_POST);
+		$data = " user_id = '".$this->settings->userdata('id')."' ";
+		foreach($_POST as $k =>$v){
+			$data .= ", {$k} = '{$v}' ";
+		}
+		$save = $this->conn->query("INSERT INTO book_list set $data");
+		if($save){
+			$resp['status'] = 'success';
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+	}
+	function update_book_status(){
+		extract($_POST);
+		$update = $this->conn->query("UPDATE book_list set status = '{$status}' where id ='{$id}' ");
+		if($update){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata('success',"Book successfully updated.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+			return json_encode($resp);
+	}
+	function register(){
+		extract($_POST);
+		$data = "";
+		$_POST['password'] = md5($password);
+		foreach($_POST as $k =>$v){
+				if(!empty($data)) $data .=",";
+					$data .= " {$k}='{$v}' ";
+		}
+		$check = $this->conn->query("SELECT * FROM users where username='{$username}' ")->num_rows;
+		if($check > 0){
+			$resp['status'] = 'failed';
+			$resp['msg'] = "Username already taken.";
+			return json_encode($resp);
+			exit;
+		}
+		$save = $this->conn->query("INSERT INTO users set $data ");
+		if($save){
+			foreach($_POST as $k =>$v){
+				$this->settings->set_userdata($k,$v);
+			}
+			$this->settings->set_userdata('id',$this->conn->insert_id);
+			$resp['status'] = 'success';
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+
+	}
+	function update_account(){
+		extract($_POST);
+		$data = "";
+		if(!empty($password)){
+			$_POST['password'] = md5($password);
+			if(md5($cpassword) != $this->settings->userdata('password')){
+				$resp['status'] = 'failed';
+				$resp['msg'] = "Current Password is Incorrect";
+				return json_encode($resp);
+				exit;
+			}
