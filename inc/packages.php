@@ -38,5 +38,4 @@
 		<a href="./?page=packages" class="btn btn-flat btn-warning mr-4">Explore Package <i class="fa fa-arrow-right"></i></a>
 	</div>
 	</div>
-	
 </section>
