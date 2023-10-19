@@ -46,3 +46,31 @@ Class Zone extends DBConnection {
 					return "INSERT INTO barangay_list set {$data}";
 				}
 			}
+			
+		}
+	}
+	public function delete_zone(){
+		extract($_POST);
+		$qry = $this->conn->query("DELETE FROM barangay_list where id = $id");
+		if($qry){
+			$this->settings->set_flashdata('success','zone successfully deleted.');
+			return 1;
+		}else{
+			return false;
+		}
+	}
+}
+
+$zone = new Zone();
+$action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
+switch ($action) {
+	case 'save':
+		echo $zone->save_zone();
+	break;
+	case 'delete':
+		echo $zone->delete_zone();
+	break;
+	default:
+		// echo $sysset->index();
+		break;
+}
