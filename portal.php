@@ -1,4 +1,3 @@
-
 <style>
 	header.masthead{
 		background-image: url('<?php echo validate_image($_settings->info('cover')) ?>') !important;
@@ -85,7 +84,7 @@
 		<div>
 			<div class="card w-100">
 				<div class="card-body">
-					<!-- <?php echo file_get_contents(base_app.'about.html') ?> -->
+					<?php echo file_get_contents(base_app.'about.html') ?>
 				</div>
 			</div>
 		</div>
@@ -136,7 +135,7 @@ $(function(){
 	$('#contactForm').submit(function(e){
 		e.preventDefault()
 		$.ajax({
-			url:_base_url_+"classes/Master.php?f=save_inquiry",
+			url:base_url+"classes/Master.php?f=save_inquiry",
 			method:"POST",
 			data:$(this).serialize(),
 			dataType:"json",
