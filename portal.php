@@ -95,7 +95,7 @@
 	<div class="container">
 		<div class="text-center">
 			<h2 class="section-heading text-uppercase">Contact Us</h2>
-			<h3 class="section-subheading text-muted">Send us a message for inquiries.</h3>
+			<h3 class="section-subheading text-muted">Kirimkan pesan kepada kami untuk pertanyaan.</h3>
 		</div>
 		<!-- * * * * * * * * * * * * * * *-->
 		<!-- * * SB Forms Contact Form * *-->

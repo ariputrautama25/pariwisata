@@ -1,4 +1,4 @@
-<!-- <style>
+<style>
     #uni_modal .modal-content>.modal-footer{
         display:none;
     }
@@ -70,4 +70,4 @@
 		        ]
 		    })
     })
-</script> -->
+</script>
