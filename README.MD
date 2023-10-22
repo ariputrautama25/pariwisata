@@ -1,10 +1,9 @@
 ## TEAM
 
 ```
-- Ari Putra Utama
+- Satrio Wibowo
 - Irpan Helmi Gunawan
 - Muhammad Vikry
-- Satrio Wibowo
 - Muhammad Aldakhim
 - Hendry dully
 - Fachri Ardian
@@ -12,15 +11,17 @@
 - Muhammad Fahreza
 - Veena Angelica
 - Andi Al Himam
+- Ari Putra Utama
 - Eko Nur
 - Andrew Kevin
-- Fuadi
+
+- M.ikwhan Fuadi
 - Riski Wahyudi
 - Juli Reformasi Harefa
 - Kresna Hiro Kartika
 - Mustafa
 - Rana Habyan
-- Dozen
+- Mochammed Dozen
 - Darmaji
 ```
 
