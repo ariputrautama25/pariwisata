@@ -42,7 +42,7 @@ if(isset($_GET['id'])){
                             </div>
                             <?php endforeach; ?>
                         </div>
-                    <a class="carousel-control-prev" href="#tourCarousel" role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#tourCarousel" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
