@@ -58,24 +58,5 @@ $(function(){
                     alert_toast("an error occured",'error')
                     end_loader()
                 },
-                success:function(resp){
-                    if(typeof resp == 'object' && resp.status == 'success'){
-                        alert_toast("Account succesfully updated",'success');
-                        $('#update_account [name="password"],#update_account [name="cpassword"]').attr('required',false);
-                        $('#update_account [name="password"],#update_account [name="cpassword"]').val('');
-                    }else if(resp.status == 'failed' && !!resp.msg){
-                        var _err_el = $('<div>')
-                            _err_el.addClass("alert alert-danger err-msg").text(resp.msg)
-                        $('#update_account').prepend(_err_el)
-                        end_loader()
-                        
-                    }else{
-                        console.log(resp)
-                        alert_toast("an error occured",'error')
-                    }
-                    end_loader()
-                }
-            })
-        })
-    })
+                
 </script>
