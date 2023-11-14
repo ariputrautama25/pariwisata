@@ -67,3 +67,54 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a href="<?php echo base_url ?>admin/?page=system_info" class="nav-link nav-system_info">
+                                    <i class="nav-icon fas fa-cogs"></i>
+                                    <p>
+                                        Settings
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                </div>
+            </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
+            <div class="os-scrollbar-track">
+                <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div>
+            </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-auto-hidden">
+            <div class="os-scrollbar-track">
+                <div class="os-scrollbar-handle" style="height: 55.017%; transform: translate(0px, 0px);"></div>
+            </div>
+        </div>
+        <div class="os-scrollbar-corner"></div>
+    </div>
+    <!-- /.sidebar -->
+</aside>
+<script>
+    $(document).ready(function() {
+        var page = '<?php echo isset($_GET['page']) ? $_GET['page'] : 'home' ?>';
+        var s = '<?php echo isset($_GET['s']) ? $_GET['s'] : '' ?>';
+        page = page.split('/');
+        page = page[0];
+        if (s != '')
+            page = page + '_' + s;
+
+        if ($('.nav-link.nav-' + page).length > 0) {
+            $('.nav-link.nav-' + page).addClass('active')
+            if ($('.nav-link.nav-' + page).hasClass('tree-item') == true) {
+                $('.nav-link.nav-' + page).closest('.nav-treeview').siblings('a').addClass('active')
+                $('.nav-link.nav-' + page).closest('.nav-treeview').parent().addClass('menu-open')
+            }
+            if ($('.nav-link.nav-' + page).hasClass('nav-is-tree') == true) {
+                $('.nav-link.nav-' + page).parent().addClass('menu-open')
+            }
+
+        }
+
+    })
+</script>
