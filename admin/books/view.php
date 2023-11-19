@@ -32,3 +32,31 @@ if(isset($_GET['id'])){
 <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Update</button>
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 </div>
+<script>
+    $(function(){
+        $('#book-status').submit(function(e){
+            e.preventDefault();
+            start_loader()
+            $.ajax({
+                url:base_url+"classes/Master.php?f=update_book_status",
+                method:"POST",
+                data:$(this).serialize(),
+                dataType:"json",
+                error:err=>{
+                    console.log(err)
+                    alert_toast("an error occured",'error')
+                    end_loader()
+                },
+                success:function(resp){
+                    if(typeof resp == 'object' && resp.status == 'success'){
+                        location.reload()
+                    }else{
+                        console.log(resp)
+                        alert_toast("an error occured",'error')
+                    }
+                    end_loader()
+                }
+            })
+        })
+    })
+</script>
