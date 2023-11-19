@@ -47,8 +47,8 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 			</div>
             <?php if(isset($upload_path) && is_dir(base_app.$upload_path)): ?>
             <?php 
-            
-                $file= scandir(base_app.$upload_path);
+        
+            $file= scandir(base_app.$upload_path);
                 foreach($file as $img):
                     if(in_array($img,array('.','..')))
                         continue;
