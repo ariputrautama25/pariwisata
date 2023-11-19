@@ -74,3 +74,36 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('.delete_data').click(function(){
+			_conf("Are you sure to delete this booking permanently?","delete_booking",[$(this).attr('data-id')])
+		})
+        $('.view_data').click(function(){
+            uni_modal("Booking Information","books/view.php?id="+$(this).attr('data-id'))
+        })
+		$('.table').dataTable();
+	})
+	function delete_booking($id){
+		start_loader();
+		$.ajax({
+			url:base_url+"classes/Master.php?f=delete_booking",
+			method:"POST",
+			data:{id: $id},
+			dataType:"json",
+			error:err=>{
+				console.log(err)
+				alert_toast("An error occured.",'error');
+				end_loader();
+			},
+			success:function(resp){
+				if(typeof resp== 'object' && resp.status == 'success'){
+					location.reload();
+				}else{
+					alert_toast("An error occured.",'error');
+					end_loader();
+				}
+			}
+		})
+	}
+</script>
