@@ -63,28 +63,72 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
             <?php endif; ?>
 
         </form>
-        $(document).ready(function(){
+    	</div>
+	<div class="card-footer">
+		<button class="btn btn-flat btn-primary" form="package-form">Save</button>
+		<a class="btn btn-flat btn-default" href="?page=responses">Cancel</a>
+	</div>
+</div>
+<script>
+    function displayImg(input,_this) {
+        console.log(input.files)
+        var fnames = []
+        Object.keys(input.files).map(k=>{
+            fnames.push(input.files[k].name)
+        })
+        _this.siblings('.custom-file-label').html(JSON.stringify(fnames))
+	    
+	}
+    function delete_img($path){
+        start_loader()
+        
+        $.ajax({
+            url: _base_url_+'classes/Master.php?f=delete_p_img',
+            data:{path:$path},
+            method:'POST',
+            dataType:"json",
+            error:err=>{
+                console.log(err)
+                alert_toast("An error occured while deleting an Image","error");
+                end_loader()
+            },
+            success:function(resp){
+                $('.modal').modal('hide')
+                if(typeof resp =='object' && resp.status == 'success'){
+                    $('[data-path="'+$path+'"]').closest('.img-item').hide('slow',function(){
+                        $('[data-path="'+$path+'"]').closest('.img-item').remove()
+                    })
+                    alert_toast("Image Successfully Deleted","success");
+                }else{
+                    console.log(resp)
+                    alert_toast("An error occured while deleting an Image","error");
+                }
+                end_loader()
+            }
+        })
+    }
+    $(document).ready(function(){
         $('.rem_img').click(function(){
-        _conf("Are sure to delete this image permanently?",'delete_img',["'"+$(this).attr('data-path')+"'"])
+            _conf("Are sure to delete this image permanently?",'delete_img',["'"+$(this).attr('data-path')+"'"])
         })
         $('#package-form').submit(function(e){
-        e.preventDefault();
-        $('.err-msg').remove();
-        start_loader();
-        $.ajax({
-        url:base_url+"classes/Master.php?f=save_package",
-        data: new FormData($(this)[0]),
-        cache: false,
-        contentType: false,
-        processData: false,
-        method: 'POST',
-        type: 'POST',
-        dataType: 'json',
-        error:err=>{
-        console.log(err)
-        alert_toast("An error occured",'error');
-        end_loader();
-        },
+            e.preventDefault();
+             $('.err-msg').remove();
+            start_loader();
+            $.ajax({
+                url:base_url+"classes/Master.php?f=save_package",
+                data: new FormData($(this)[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                type: 'POST',
+                dataType: 'json',
+                error:err=>{
+                    console.log(err)
+                    alert_toast("An error occured",'error');
+                    end_loader();
+                },
         success:function(resp){
         if(typeof resp =='object' && resp.status == 'success'){
         location.href = "./?page=packages";
