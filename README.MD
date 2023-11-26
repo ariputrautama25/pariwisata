@@ -1,4 +1,4 @@
-## TEAM
+## TEAM 2
 
 ```
 - Satrio Wibowo (PM)
@@ -25,6 +25,9 @@
 - Mustafa Zuhair (Full Stack)
 
 ```
+- Untuk Menjalankan di Lokal Import database
+- jalankan dengan cara localhost/pariwisata/
+- untuk masuk ke admin nya localhost/pariwisata/admin/
 
 ## Link Project 
 
