@@ -34,8 +34,8 @@
                 <tbody>
                     <?php
                     $i = 1;
-                    $qry = $conn->query("SELECT * FROM inquiry order by date(date_created) desc ");
-                    while ($row = $qry->fetch_assoc()) :
+                        $qry = $conn->query("SELECT * FROM inquiry order by date(date_created) desc ");
+                        while ($row = $qry->fetch_assoc()) :
                     ?>
                         <tr>
                             <td><?php echo $i++ ?></td>
@@ -65,7 +65,41 @@
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
-            </table>
+        </table>
         </div>
     </div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('.delete_data').click(function(){
+			_conf("Are you sure to delete this inquiry permanently?","delete_inquiry",[$(this).attr('data-id')])
+		})
+        $('.view_data').click(function(){
+            uni_modal("Inquiry","inquiries/view.php?id="+$(this).attr('data-id'))
+            $(this).closest('tr').find('.status').html('<span class="badge badge-success">Read</span>')
+        })
+		$('.table').dataTable();
+	})
+	function delete_inquiry($id){
+		start_loader();
+		$.ajax({
+			url:_base_url_+"classes/Master.php?f=delete_inquiry",
+			method:"POST",
+			data:{id: $id},
+			dataType:"json",
+			error:err=>{
+				console.log(err)
+				alert_toast("An error occured.",'error');
+				end_loader();
+			},
+			success:function(resp){
+				if(typeof resp== 'object' && resp.status == 'success'){
+					location.reload();
+				}else{
+					alert_toast("An error occured.",'error');
+					end_loader();
+				}
+			}
+		})
+	}
+</script>
