@@ -11,7 +11,7 @@ if(isset($_GET['id'])){
     #uni_modal .modal-content>.modal-footer{
         display:none;
     }
-    </style>
+</style>
 <p><b>Package:</b> <?php echo $title ?></p>
 <p><b>Details:</b> <span class="truncate"><?php echo strip_tags(stripslashes(html_entity_decode($title))) ?></span></p>
 <p><b>Schedule:</b> <?php echo date("F d, Y",strtotime("schedule")) ?></p>
@@ -32,6 +32,7 @@ if(isset($_GET['id'])){
 <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Update</button>
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 </div>
+
 <script>
     $(function(){
         $('#book-status').submit(function(e){
