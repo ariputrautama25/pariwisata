@@ -52,3 +52,32 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('.delete_data').click(function(){
+			_conf("Are you sure to delete this data?","delete_question",[$(this).attr('data-id')])
+		})
+		$('.table').dataTable();
+	})
+	function delete_question($id){
+		start_loader();
+		$.ajax({
+			url:base_url+"classes/Master.php?f=delete_unanswer",
+			method:"POST",
+			data:{id: $id},
+			error:err=>{
+				console.log(err)
+				alert_toast("An error occured.",'error');
+				end_loader();
+			},
+			success:function(resp){
+				if(resp == 1){
+					location.reload();
+				}else{
+					alert_toast("An error occured.",'error');
+					end_loader();
+				}
+			}
+		})
+	}
+</script>
