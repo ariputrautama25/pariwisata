@@ -78,4 +78,53 @@
 
 	</div>
 </div>
+<script>
+	function displayImg(input,_this) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        	$('#cimg').attr('src', e.target.result);
+	        	_this.siblings('.custom-file-label').html(input.files[0].name)
+	        }
 
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	function displayImg2(input,_this) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        	_this.siblings('.custom-file-label').html(input.files[0].name)
+	        	$('#cimg2').attr('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	function displayImg3(input,_this) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        	_this.siblings('.custom-file-label').html(input.files[0].name)
+	        	$('#cimg3').attr('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$(document).ready(function(){
+		 $('.summernote').summernote({
+		        height: 200,
+		        toolbar: [
+		            [ 'style', [ 'style' ] ],
+		            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+		            [ 'fontname', [ 'fontname' ] ],
+		            [ 'fontsize', [ 'fontsize' ] ],
+		            [ 'color', [ 'color' ] ],
+		            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+		            [ 'table', [ 'table' ] ],
+		            [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+		        ]
+		    })
+	})
+</script>
