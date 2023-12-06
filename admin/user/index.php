@@ -53,3 +53,45 @@ foreach($user->fetch_array() as $k =>$v){
 			</div>
 		</div>
 </div>
+<style>
+	img#cimg{
+		height: 15vh;
+		width: 15vh;
+		object-fit: cover;
+		border-radius: 100% 100%;
+	}
+</style>
+<script>
+	function displayImg(input,_this) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        	$('#cimg').attr('src', e.target.result);
+	        }
+
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$('#manage-user').submit(function(e){
+		e.preventDefault();
+		start_loader()
+		$.ajax({
+			url:base_url+'classes/Users.php?f=save',
+			data: new FormData($(this)[0]),
+		    cache: false,
+		    contentType: false,
+		    processData: false,
+		    method: 'POST',
+		    type: 'POST',
+			success:function(resp){
+				if(resp ==1){
+					location.reload()
+				}else{
+					$('#msg').html('<div class="alert alert-danger">Username already exist</div>')
+					end_loader()
+				}
+			}
+		})
+	})
+
+</script>
